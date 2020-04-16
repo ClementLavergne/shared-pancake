@@ -1,0 +1,15 @@
+terms:
+    rows:
+        -   keyword:        Source Configuration File
+            description:    This a manifest for corresponding document generation.
+
+    layout:
+        -   id:             keyword
+            header:         Term
+            align:          AlignCenter
+            width:          0.25
+
+        -   id:             description
+            header:         Definition
+            align:          AlignDefault
+            width:          0.75

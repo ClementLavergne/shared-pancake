@@ -1,0 +1,71 @@
+####################
+# Pandoc's options #
+####################
+documentclass:          book
+classoption:            openany
+papersize:              a4
+linestretch:            1.25
+fontenc:                T1
+fontsize:               9pt
+urlcolor:               cyan
+filecolor:              magenta
+linkcolor:              cyan
+citecolor:              cyan
+links-as-notes:         False
+has-frontmatter:        True
+secnumdepth:            6
+toc-title:              Table of Contents
+toc-depth:              5
+graphics:               True
+verbatim-in-note:       True
+tables:                 True
+geometry:
+  - top=25mm
+  - bottom=25mm
+  - left=15mm
+  - right=15mm
+header-includes:
+  # Packages
+  - \usepackage{multirow}
+  - \usepackage{tabularx}
+  - \usepackage{color}
+  - \usepackage{fancyhdr}
+  - \usepackage{arydshln}
+  - \usepackage{sectsty}
+  - \usepackage[yyyymmdd]{datetime}
+  - \usepackage[skins]{tcolorbox}
+  - \usepackage{placeins}
+  - \usepackage{pdflscape}
+  - \usepackage{titlesec}
+  - \usepackage[Lenny]{fncychap}
+  - \usepackage{float}
+  - \usepackage{fvextra}
+  - |
+    \usepackage{multicol}
+    \setlength{\columnsep}{1cm}
+  # Colors
+  - \definecolor{grey}{rgb}{0.5,0.5,0.5}
+  - \definecolor{crimson}{rgb}{0.86,0.07,0.23}
+  - \definecolor{coral}{rgb}{1.0,0.5,0.31}
+  - \definecolor{tomato}{rgb}{1.0,0.38,0.27}
+  - \definecolor{yellow}{rgb}{0.99,0.79,0.05}
+include-before:
+  # Custom header and footer
+  - \pagestyle{header_footer}
+
+####################
+# Added options    #
+####################
+increase-subsections:   True
+texlive-section-num:    True
+remove-space-padding:   True
+verbatim-color:         crimson
+date-separator:         '-'
+long-code-line-fix:     True
+quote-style:
+  - enhanced
+  - colback=cyan!5!white
+  - colframe=white
+  - coltitle=black
+  - sharp corners
+  - boxrule=0.4pt

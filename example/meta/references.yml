@@ -1,0 +1,27 @@
+references:
+    rows:
+        -   keyword:        Test
+            description:    This a test
+            version: |
+                            1.0
+
+        -   keyword:        Pandoc User's Guide
+            description:    Online documentation
+            version: |
+                            [2.9.2.1](https://pandoc.org/MANUAL.html)
+
+    layout:
+        -   id:             keyword
+            header:         Short name
+            align:          AlignCenter
+            width:          0.25
+
+        -   id:             description
+            header:         Original title
+            align:          AlignDefault
+            width:          0.60
+
+        -   id:             version
+            header:         Version
+            align:          AlignCenter
+            width:          0.15

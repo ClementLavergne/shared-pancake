@@ -1,0 +1,49 @@
+revisions:
+    rows:
+        -   version:        0.1.0
+            date:           2019-06-12
+            author:         Someone
+            description: |
+                            Initial creation of the document.
+
+        -   version:        0.1.1
+            date:           2019-06-15
+            author:         Someone else
+            description: |
+                            New chapter added.
+
+        -   version:        0.2.0
+            date:           2020-03-17
+            author:         Me!
+            description: |
+                            Chapter 2 added to explain the use of..
+
+                            - Markdown's table
+                            - Complex table
+
+        -   version:        0.3.0
+            date:           2020-04-15
+            author:         Me!
+            description: |
+                            Add new source files.
+
+    layout:
+        -   id:             version
+            header:         Version
+            align:          AlignCenter
+            width:          0.10
+
+        -   id:             date
+            header:         Date
+            align:          AlignCenter
+            width:          0.15
+
+        -   id:             author
+            header:         Author
+            align:          AlignDefault
+            width:          0.20
+
+        -   id:             description
+            header:         Reason
+            align:          AlignDefault
+            width:          0.60

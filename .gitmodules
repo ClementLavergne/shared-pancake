@@ -1,0 +1,4 @@
+
+[submodule "example/script"]
+	path = example/script
+	url = https://github.com/ClementLavergne/extra-pandoc-filters.git

@@ -1,0 +1,29 @@
+metadata:
+    title:          Skeleton
+    subtitle:       Empty document
+    subject:        Example
+    description: |
+                    Empty description.
+    category:       Tutorial
+    version:        1.0.0
+    targets:
+        latex:      template/latex-custom.yml
+        html:       template/html-custom.yml
+        pdf:        template/pdf-custom.yml
+
+input-files:
+    - source/skeleton/markdown/first-chapter.md
+    - source/skeleton/markdown/second-chapter.md
+
+metadata-files:
+    - meta/abbreviations.yml
+    - meta/terms.yml
+    - meta/references.yml
+    - source/skeleton/meta/revisions.yml
+
+filters:
+    - script/generic-table/generic-table.lua
+    - script/plantuml-diagram/plantuml-diagram.lua
+    - script/show-unnumbered-toc/show-unnumbered-toc.lua
+
+resource-path: [".","source/skeleton"]
