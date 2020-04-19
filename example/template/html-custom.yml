@@ -1,0 +1,13 @@
+template:   template/source/pandoc-template.html
+
+input-files:
+    - template/markdown/preamble.md
+
+css:
+    - template/theme/custom-style.css
+
+highlight-style:    template/theme/code-block.theme
+preserve-tabs:      true
+self-contained:     true
+toc:                true
+toc-depth:          3

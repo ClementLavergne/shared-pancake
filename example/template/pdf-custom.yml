@@ -1,0 +1,18 @@
+template:   template/source/custom-template.tex
+
+input-files:
+    - template/markdown/preamble.md
+
+metadata-files:
+    - template/meta/custom-latex-data.yml
+
+filters:
+    - script/landscape/landscape.lua
+    - script/preamble-separator/preamble-separator.lua
+    - script/columns/columns.lua
+
+highlight-style:    template/theme/code-block.theme
+preserve-tabs:      true
+pdf-engine:         xelatex
+pdf-engine-opts:
+    - "-shell-escape"

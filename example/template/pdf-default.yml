@@ -1,0 +1,10 @@
+template:   template/source/pandoc-template.tex
+
+input-files:
+    - template/markdown/preamble.md
+
+metadata-files:
+    - template/meta/minimal-latex-data.yml
+
+filters:
+    - script/preamble-separator/preamble-separator.lua

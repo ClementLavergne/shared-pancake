@@ -1,0 +1,24 @@
+abbreviations:
+    rows:
+        -   keyword:        H/W
+            description:    Hardware
+
+        -   keyword:        IPC
+            description:    Inter-Process Communication
+
+        -   keyword:        SDD
+            description:    Software Design Document
+
+        -   keyword:        S/W
+            description:    Software
+
+    layout:
+        -   id:             keyword
+            header:         Acronym
+            align:          AlignCenter
+            width:          0.25
+
+        -   id:             description
+            header:         Definition
+            align:          AlignDefault
+            width:          0.75

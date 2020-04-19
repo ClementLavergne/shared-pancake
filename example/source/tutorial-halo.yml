@@ -1,0 +1,32 @@
+metadata:
+    title:          How to write documents?
+    subtitle:       Introduction
+    description: |
+                    This document describes briefly how
+                    to use the tool.
+    category:       Tutorial
+    version:        0.2.0
+    targets:
+        pdf:        template/pdf-custom.yml
+    logo:           source/tutorial/image/haloinfinite-logo.png
+
+input-files:
+    - source/tutorial/markdown/introduction.md
+    - source/tutorial/markdown/basics.md
+    - source/tutorial/markdown/tables.md
+    - source/tutorial/markdown/code-blocks.md
+    - source/tutorial/markdown/macros.md
+    - source/tutorial/markdown/textual-diagrams.md
+
+metadata-files:
+    - meta/abbreviations.yml
+    - meta/terms.yml
+    - meta/references.yml
+    - source/tutorial/meta/revisions.yml
+
+filters:
+    - script/generic-table/generic-table.lua
+    - script/plantuml-diagram/plantuml-diagram.lua
+    - script/show-unnumbered-toc/show-unnumbered-toc.lua
+
+resource-path: [".","source/tutorial/markdown"]

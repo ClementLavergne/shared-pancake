@@ -1,0 +1,8 @@
+template:   template/source/pandoc-template.html
+
+input-files:
+    - template/markdown/preamble.md
+
+self-contained:     true
+toc:                true
+toc-depth:          3

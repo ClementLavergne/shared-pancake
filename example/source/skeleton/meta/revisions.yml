@@ -1,0 +1,28 @@
+revisions:
+    rows:
+        -   version:        1.0.0
+            date:           2019-06-12
+            author:         Firstname Lastname
+            description: |
+                            Initial creation of the document.
+
+    layout:
+        -   id:             version
+            header:         Version
+            align:          AlignCenter
+            width:          0.10
+
+        -   id:             date
+            header:         Date
+            align:          AlignCenter
+            width:          0.15
+
+        -   id:             author
+            header:         Author
+            align:          AlignDefault
+            width:          0.20
+
+        -   id:             description
+            header:         Reason
+            align:          AlignDefault
+            width:          0.60

@@ -1,0 +1,5 @@
+input-files:
+    - template/markdown/preamble.md
+
+highlight-style:    template/theme/code-block.theme
+preserve-tabs:      true
