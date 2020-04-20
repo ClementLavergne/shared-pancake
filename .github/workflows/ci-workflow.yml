@@ -1,0 +1,75 @@
+name: Continuous Integration
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+env:
+  PANDOC_VERSION: 2.9.2.1
+  PLANTUML_VERSION: 1.2020.6
+  JQ_VERSION: 1.6
+  TOOLS_DIR: tools
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    name: Test Ubuntu setup
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Install required packages
+        run: |
+          sudo apt-get install -y graphviz
+          sudo apt-get install -y make
+          sudo apt-get install -y openjdk-11-jre
+          sudo apt-get install -y ruby
+          sudo apt-get install -y texlive-font-utils
+          sudo apt-get install -y texlive-latex-extra
+          sudo apt-get install -y texlive-xetex
+          sudo apt-get install -y wget
+
+      - name: Apply workaround to Ruby
+        run: sudo gem update --system 3.0.6
+
+      - name: Download and install Pandoc
+        run: |
+          mkdir $FOLDER
+          wget -O $PANDOC_PACKAGE $PANDOC_PACKAGE_URL
+          sudo dpkg -i $PANDOC_PACKAGE
+        env:
+          FOLDER: ${{ env.TOOLS_DIR }}
+          PANDOC_PACKAGE: ${{ env.TOOLS_DIR }}/pandoc.deb
+          PANDOC_PACKAGE_URL: https://github.com/jgm/pandoc/releases/download/${{ env.PANDOC_VERSION }}/pandoc-${{ env.PANDOC_VERSION }}-1-amd64.deb
+
+      - name: Download Plantuml
+        run: |
+          wget -O $PLANTUML $PLANTUML_BIN_URL
+        env:
+          PLANTUML: ${{ github.workspace }}/${{ env.TOOLS_DIR }}/plantuml.jar
+          PLANTUML_BIN_URL: https://sourceforge.net/projects/plantuml/files/${{ env.PLANTUML_VERSION }}/plantuml.${{ env.PLANTUML_VERSION }}.jar/download
+
+      - name: Download and install Jq
+        run: |
+          sudo wget -O $JQ_BIN $JQ_BIN_URL
+          sudo chmod +x $JQ_BIN
+        env:
+          JQ_BIN: /usr/bin/jq
+          JQ_BIN_URL: https://github.com/stedolan/jq/releases/download/jq-${{ env.JQ_VERSION }}/jq-linux64
+
+      - name: Generate the example project
+        run: |
+          bash script/make-documents.sh
+          rm -rf example/generated/tmp
+        env:
+          PLANTUML: ${{ github.workspace }}/${{ env.TOOLS_DIR }}/plantuml.jar
+          JAVA_HOME: /usr/bin/java
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: example-artifacts
+          path: ${{ github.workspace }}/example/generated
