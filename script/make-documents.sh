@@ -17,9 +17,27 @@ else
   fi
 fi
 
+wait_all_tasks() {
+  pids="$@"
+  EXIT_CODE=0
+  for job in "${pids[@]}"; do
+      CODE=0;
+      wait ${job} || CODE=$?
+      if [[ "${CODE}" != "0" ]]; then
+          echo "At least one operation failed with exit code ${CODE}" ;
+          EXIT_CODE=1;
+      fi
+  done
+}
+
+background_tasks=()
 for yaml in $source_folder/*yml; do
     yaml=${yaml#"$project/"}
     echo "### Processing of '$yaml'"
-    make PRJ_PATH=$project SRC_FILE=$yaml OUT_PATH=$out &
+    make PRJ_PATH=$project SRC_FILE=$yaml OUT_PATH=$out & current_pid=$!
+    background_tasks+=("$current_pid")
 done
-wait
+
+wait_all_tasks "${background_tasks[@]}"
+
+exit "$EXIT_CODE"
