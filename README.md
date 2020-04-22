@@ -1,3 +1,5 @@
+![Continuous Integration](https://github.com/ClementLavergne/shared-pancake/workflows/Continuous%20Integration/badge.svg)
+
 # shared-pancake 🥞 user's guide
 
 Management of templated documents written in a *customizable* `Markdown` syntax, for:
