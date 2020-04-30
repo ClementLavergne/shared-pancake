@@ -15,7 +15,7 @@ env:
 jobs:
   linux:
     runs-on: ubuntu-latest
-    name: Test Ubuntu setup
+    name: Ubuntu setup
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
@@ -24,14 +24,21 @@ jobs:
 
       - name: Install required packages
         run: |
+          sudo apt-get update
           sudo apt-get install -y graphviz
           sudo apt-get install -y make
           sudo apt-get install -y openjdk-11-jre
           sudo apt-get install -y ruby
-          sudo apt-get install -y texlive-font-utils
-          sudo apt-get install -y texlive-latex-extra
-          sudo apt-get install -y texlive-xetex
           sudo apt-get install -y wget
+
+      - name: Install TinyTex distribution
+        uses: r-lib/actions/setup-tinytex@v1
+
+      - name: Install few LaTeX packages
+        run: |
+          tlmgr install arydshln setspace datetime environ epstopdf epstopdf-pkg fancyhdr fmtcount \
+              fvextra fncychap lineno mdwtools multirow pdflscape pgf placeins sectsty tcolorbox \
+              titlesec trimspaces unicode-math xcolor
 
       - name: Apply workaround to Ruby
         run: sudo gem update --system 3.0.6
@@ -64,12 +71,35 @@ jobs:
       - name: Generate the example project
         run: |
           bash script/make-documents.sh
-          rm -rf example/generated/tmp
         env:
           PLANTUML: ${{ github.workspace }}/${{ env.TOOLS_DIR }}/plantuml.jar
           JAVA_HOME: /usr/bin/java
 
       - uses: actions/upload-artifact@v1
+        if: github.ref == 'refs/heads/master'
         with:
-          name: example-artifacts
+          name: ubuntu-example-artifacts
           path: ${{ github.workspace }}/example/generated
+
+  alpine-docker:
+    runs-on: ubuntu-latest
+    name: Docker-based setup
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Build the docker image
+        run: |
+          docker build -t shared-pancake .
+
+      - name: Generate the example project
+        run: |
+          docker run --rm -v `pwd`:/host -t shared-pancake /bin/bash -c "bash script/make-documents.sh && mv example/generated /host"
+
+      - uses: actions/upload-artifact@v1
+        if: github.ref == 'refs/heads/master'
+        with:
+          name: alpine-example-artifacts
+          path: ${{ github.workspace }}/generated

@@ -220,15 +220,32 @@ docker images
 
 There are plenty ways to invoke the `Makefile` through a container.
 
-The following command can be run anywhere; it creates a new container with a shared directory to execute the **COMMAND** and then deletes it. More information [there](https://docs.docker.com/engine/reference/commandline/run/).
+The following command can be run anywhere; it instantiates a new container using **IMAGE**, shares a volume with the *host* and executes the **COMMAND** before being deleted:
 
 ```bash
 docker run --rm -v HOST_DIRECTORY:CONTAINER_DIRECTORY -i -t IMAGE COMMAND
 ```
 
-The mounted volume between the *host* and the *container* enables the user to retrieve generated files directly from *host* side. In other words, there is a hard-link between `CONTAINER_DIRECTORY` and `HOST_DIRECTORY`: it uses the same place!
+The mounted volume between the *host* and the *container* enables the user to retrieve generated files directly from *host* side.
+
+In other words, there is a hard-link between **CONTAINER_DIRECTORY** and **HOST_DIRECTORY** to become the same place! 😯
 
 > Make sure the selected volume is allowed from `Docker` preferences.
+More information about `-v` option [there](https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only).
+
+However, it can be more convenient to make a container persistent and *attach* to it:
+
+```bash
+docker run -v HOST_DIRECTORY:CONTAINER_DIRECTORY -i -t IMAGE
+```
+
+#### Limitations
+
+As few `LaTeX` packages are pre-installed, you'll probably need to install new ones according to your needs.
+
+If an error occurs when generating a `PDF`, you should follow the steps described into chapter *Maintenance* of the [TinyTeX web page](https://yihui.org/tinytex/#maintenance).
+
+> Feel free to create your own `Docker` image from this one.
 
 ### Ubuntu
 
