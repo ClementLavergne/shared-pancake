@@ -75,6 +75,7 @@ jobs:
           JAVA_HOME: /usr/bin/java
 
       - uses: actions/upload-artifact@v1
+        if: github.ref == 'refs/heads/master'
         with:
           name: ubuntu-example-artifacts
           path: ${{ github.workspace }}/example/generated
@@ -97,6 +98,7 @@ jobs:
           docker run --rm -v `pwd`:/host -t shared-pancake /bin/bash -c "bash script/make-documents.sh && mv example/generated /host"
 
       - uses: actions/upload-artifact@v1
+        if: github.ref == 'refs/heads/master'
         with:
           name: alpine-example-artifacts
           path: ${{ github.workspace }}/generated
