@@ -5,8 +5,8 @@ RUN apk add bash \
             ghostscript \
             make \
             openjdk11-jre \
+            perl \
             ruby-full \
-            texlive-full \
             ttf-dejavu \
             wget
 
@@ -39,6 +39,15 @@ RUN wget -O $PLANTUML "https://sourceforge.net/projects/plantuml/files/${plantum
 # Jq
 RUN wget -O /usr/local/bin/jq "https://github.com/stedolan/jq/releases/download/jq-${jq_version}/jq-linux64" && \
     chmod +x /usr/local/bin/jq
+
+# TinyTex
+ENV PATH "$PATH:/opt/TinyTeX/bin/x86_64-linuxmusl"
+RUN wget -qO- "https://github.com/yihui/tinytex/raw/master/tools/install-unx.sh" | sh && \
+    mv ~/.TinyTeX /opt/TinyTeX && \
+    tlmgr path add && \
+    tlmgr install arydshln setspace datetime environ epstopdf epstopdf-pkg fancyhdr fmtcount \
+        fvextra fncychap lineno mdwtools multirow pdflscape pgf placeins sectsty tcolorbox \
+        titlesec trimspaces unicode-math xcolor
 
 # Copy tool
 ADD Makefile    ${project_name}/Makefile

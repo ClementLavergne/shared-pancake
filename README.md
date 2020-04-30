@@ -239,6 +239,14 @@ However, it can be more convenient to make a container persistent and *attach* t
 docker run -v HOST_DIRECTORY:CONTAINER_DIRECTORY -i -t IMAGE
 ```
 
+#### Limitations
+
+As few `LaTeX` packages are pre-installed, you'll probably need to install new ones according to your needs.
+
+If an error occurs when generating a `PDF`, you should follow the steps described into chapter *Maintenance* of the [TinyTeX web page](https://yihui.org/tinytex/#maintenance).
+
+> Feel free to create your own `Docker` image from this one.
+
 ### Ubuntu
 
 Follow the `Dockerfile`. Easy. 🤓

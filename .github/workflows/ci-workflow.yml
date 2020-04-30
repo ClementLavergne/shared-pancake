@@ -28,10 +28,16 @@ jobs:
           sudo apt-get install -y make
           sudo apt-get install -y openjdk-11-jre
           sudo apt-get install -y ruby
-          sudo apt-get install -y texlive-font-utils
-          sudo apt-get install -y texlive-latex-extra
-          sudo apt-get install -y texlive-xetex
           sudo apt-get install -y wget
+
+      - name: Install TinyTex distribution
+        uses: r-lib/actions/setup-tinytex@v1
+
+      - name: Install few LaTeX packages
+        run: |
+          tlmgr install arydshln setspace datetime environ epstopdf epstopdf-pkg fancyhdr fmtcount \
+              fvextra fncychap lineno mdwtools multirow pdflscape pgf placeins sectsty tcolorbox \
+              titlesec trimspaces unicode-math xcolor
 
       - name: Apply workaround to Ruby
         run: sudo gem update --system 3.0.6
